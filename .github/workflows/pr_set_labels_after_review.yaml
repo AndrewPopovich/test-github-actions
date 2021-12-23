@@ -12,6 +12,7 @@ jobs:
           APPROVALS: "1"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ADD_LABEL: "in_review"
+          REMOVE_LABEL: "changes_requested"
 
       - name: Set ready_for_testing
         uses: AndrewPopovich/label-when-approved-action@master
@@ -19,7 +20,7 @@ jobs:
           APPROVALS: "2"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ADD_LABEL: "ready_for_testing"
-          REMOVE_LABEL: "in_review"
+          REMOVE_LABEL: "in_review,changes_requested"
 
       - name: Set changes_requested
         uses: AndrewPopovich/label-when-approved-action@master
