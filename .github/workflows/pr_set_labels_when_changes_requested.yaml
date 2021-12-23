@@ -5,10 +5,10 @@ on:
 
 jobs:
   changes-requested:
-      if: github.event.review.state != 'approved'
       runs-on: ubuntu-latest
     steps:
       - name: Changes requested labeling
         uses: andymckay/labeler@master
+        if: github.event.review.state != 'approved'
         with:
           add-labels: "changes_requested"
