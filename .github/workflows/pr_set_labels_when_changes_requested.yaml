@@ -5,7 +5,7 @@ on:
 
 jobs:
   changes-requested:
-      runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Changes requested labeling
         uses: andymckay/labeler@master
