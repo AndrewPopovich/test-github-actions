@@ -1,0 +1,14 @@
+name: Label changes requested pull requests
+on:
+  pull_request_review:
+    types: [dismissed]
+
+jobs:
+  changes-requested:
+      if: github.event.review.state != 'approved'
+      runs-on: ubuntu-latest
+    steps:
+      - name: Changes requested labeling
+        uses: andymckay/labeler@master
+        with:
+          add-labels: "changes_requested"

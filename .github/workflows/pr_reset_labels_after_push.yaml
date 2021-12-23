@@ -1,0 +1,19 @@
+name: PR Reset Labels
+
+on:
+  pull_request:
+    types:
+      - synchronize
+
+jobs:
+  check_labels:
+    name: Reset Labels
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions-ecosystem/action-remove-labels@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          labels: |
+            in_review
+            ready_for_testing
+            tested
