@@ -7,16 +7,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set in_review
-        uses: pullreminders/label-when-approved-action@master
+        uses: AndrewPopovich/label-when-approved-action@master
         env:
           APPROVALS: "1"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ADD_LABEL: "in_review"
 
       - name: Set ready_for_testing
-        uses: pullreminders/label-when-approved-action@master
+        uses: AndrewPopovich/label-when-approved-action@master
         env:
           APPROVALS: "2"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ADD_LABEL: "ready_for_testing"
+          REMOVE_LABEL: "in_review"
+
+      - name: Set ready_for_testing
+        uses: AndrewPopovich/label-when-approved-action@master
+        env:
+          APPROVALS: "2"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ADD_LABEL: "changes_requested"
           REMOVE_LABEL: "in_review"
