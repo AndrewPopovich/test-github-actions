@@ -1,0 +1,17 @@
+name: PR Set Labels
+
+on:
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  set_labels:
+    name: Set Labels
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions-ecosystem/action-add-labels@v1
+        if: ${{ startsWith(github.event.pull_request.head.ref, 'QA-') }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          labels: tests

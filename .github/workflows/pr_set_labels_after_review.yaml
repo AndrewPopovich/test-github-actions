@@ -1,0 +1,30 @@
+name: Label approved pull requests
+on:
+  pull_request_review
+jobs:
+  labelWhenApproved:
+    name: Label when approved
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set in_review
+        uses: AndrewPopovichArdas/label-when-approved-and-changes-requested-action@master
+        env:
+          APPROVALS: "1"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ADD_LABEL: "in_review"
+
+      - name: Set ready_for_testing
+        uses: AndrewPopovichArdas/label-when-approved-and-changes-requested-action@master
+        env:
+          APPROVALS: "2"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ADD_LABEL: "ready_for_testing"
+          REMOVE_LABEL: "in_review"
+
+      - name: Set changes_requested
+        uses: AndrewPopovichArdas/label-when-approved-and-changes-requested-action@master
+        env:
+          CHANGES_REQUESTED: "1"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ADD_LABEL: "changes_requested"
+          REMOVE_LABEL: "in_review"

@@ -1,0 +1,32 @@
+name: Pull Request Checks
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - labeled
+      - unlabeled
+      - synchronize
+
+jobs:
+  check_labels:
+    name: Check Labels
+    runs-on: ubuntu-latest
+    steps:
+      - name: Reset status
+        uses: ouzi-dev/commit-status-updater@v1.1.0
+        with:
+          name: "github/labels"
+          status: "success"
+      - name: Require & restrict label
+        uses: ouzi-dev/commit-status-updater@v1.1.0
+        with:
+          name: "github/labels"
+          status: "failure"
+          description: "All required labels should present and all restricted labels should absent"
+        if: |
+          !contains( github.event.pull_request.labels.*.name, 'tested' )
+          || contains( github.event.pull_request.labels.*.name, 'QA_pending')
+          || contains( github.event.pull_request.labels.*.name, 'bug')
+          || contains( github.event.pull_request.labels.*.name, 'changes_requested')
